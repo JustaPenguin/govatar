@@ -9,7 +9,8 @@ Govatar is a silly little program written in Golang that generates a unique avat
 
 To use call the CreateAvatar function, passing the width and height of the
 canvas, the width and height of each "block", the user name (or any string) that you want
-the govatar to be based on and a salt string used to generate hash.
+the govatar to be based on, a salt string used to generate hash and the desired vibrance
+(recommended value of four).
 Block width and height should be divisors of canvas width and height.
 
 If you only require basic functionality then

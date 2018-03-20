@@ -22,7 +22,7 @@ var (
 type block struct{}
 
 // Create the avatar and return as image.Image
-func CreateAvatar(canvasWidth, canvasHeight, blockWidth, blockHeight int, userName, salt string) (image.Image, error) {
+func CreateAvatar(canvasWidth, canvasHeight, blockWidth, blockHeight int, vibrance uint8, userName, salt string) (image.Image, error) {
 	var shuffleInt int64
 	shuffleInt = 1
 
@@ -84,6 +84,8 @@ func CreateAvatar(canvasWidth, canvasHeight, blockWidth, blockHeight int, userNa
 			// Use this data to seed the RBG shuffle rand value
 			if num1*num0 != 0 {
 				shuffleInt *= int64(num1 * num0)
+			} else {
+				shuffleInt += int64(num1 + num0)
 			}
 
 		} else {
@@ -97,9 +99,9 @@ func CreateAvatar(canvasWidth, canvasHeight, blockWidth, blockHeight int, userNa
 			}
 
 			// Generate RGB values
-			colors[0] = ((num0 * 4) * num1) + num2
-			colors[1] = ((num1 * 4) * num2) + num0
-			colors[2] = ((num2 * 4) * num0) + num1
+			colors[0] = ((num0 * vibrance) * num1) + num2
+			colors[1] = ((num1 * vibrance) * num2) + num0
+			colors[2] = ((num2 * vibrance) * num0) + num1
 
 			// Shuffle the colors based on rand
 			Shuffle(colors, shuffleInt)
